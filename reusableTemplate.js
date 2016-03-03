@@ -6,9 +6,17 @@ var library = (function () {
         },
 
         // Collections --- Complete Functions Below
-        each: function (list, iterator) {          
-           
-
+        each: function (list, iterator) {
+            if (Array.isArray(list)) {
+                for (var i = 0; i < list.length; i++) {
+                    iterator(list[i], i, list);
+                }
+            }
+            else {
+                for (var key in list) {
+                    iterator(list[key], key, list);
+                }
+            }
         },
 
         filter: function (list, test) {
@@ -25,7 +33,7 @@ var library = (function () {
             return odd;
 
         },
-        reject: function (list, test) { 
+        reject: function (list, test) {
             var eve = [];
             var odd = [];
             for (var i = 0; i < list.length; i++) {
@@ -35,7 +43,7 @@ var library = (function () {
                     odd.push(list[i]);
                 }
             }
-            
+
             return odd;
         },
 
@@ -49,16 +57,18 @@ var library = (function () {
             });
         },
         reduce: function (list, iterator, accumulator) {
-            for (var i = 0; i < list.length; i++) {
-                accumulator = iterator(list[i], accumulator);
+            if (accumulator === undefined) {
+                accumulator = list[0];
             }
+            this.each(list, function (item) {
+                accumulator = iterator(accumulator, item);
+            })
             return accumulator;
         },
-
+        
         every: function (list, iterator) {
-            var x;
-            if (list[x] == true) {
-
+            if (iterator === undefined) {
+                iterator = this.identity;
             }
         },
 
