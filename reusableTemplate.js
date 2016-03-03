@@ -65,14 +65,31 @@ var library = (function () {
             })
             return accumulator;
         },
-        
+
         every: function (list, iterator) {
             if (iterator === undefined) {
                 iterator = this.identity;
             }
+            for (var i = 0; i < list.length; i++) {
+                if (iterator(list[i]) == false) {
+                    return false;
+                }
+            }
+            return true;
         },
 
-        some: function (list, iterator) { },
+        some: function (list, iterator) {
+            if (iterator === undefined) {
+                iterator = this.identity;
+            }
+
+            for (var i = 0; i < list.length; i++) {
+                if (iterator(list[i])) {
+                    return true;
+                }
+            }
+            return false;
+        },
 
         contains: function (list, target) {
             for (var e in list) {
