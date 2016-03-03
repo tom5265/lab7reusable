@@ -6,32 +6,41 @@ var library = (function () {
         },
 
         // Collections --- Complete Functions Below
-        each: function (list, iterator) {
-            list = ['dog', 'cat', 'fish'];
-            for (var i = 0; i < list.length; i++) {
-                iterator(list[i], i, list);
-            }
+        each: function (list, iterator) {          
+           
 
         },
 
         filter: function (list, test) {
-            var results = [];
-            
+            var eve = [];
+            var odd = [];
             for (var i = 0; i < list.length; i++) {
-                if (list[i] > test) {
-                    results.push(list[i]);
+                if (test(list[i]) == true) {
+                    eve.push(list[i]);
+                } else {
+                    odd.push(list[i]);
                 }
             }
-            return results;
+            return eve;
+            return odd;
+
         },
-        reject: function (list, test) { },
+        reject: function (list, test) { 
+            var eve = [];
+            var odd = [];
+            for (var i = 0; i < list.length; i++) {
+                if (test(list[i]) == true) {
+                    eve.push(list[i]);
+                } else {
+                    odd.push(list[i]);
+                }
+            }
+            
+            return odd;
+        },
 
         map: function (list, iterator) {
-            var array = [];
-            for (i = 0; i < list.length; i++) {
-                array.push(iterator(list[i], i, list));
-            }
-            return array;
+
         },
 
         pluck: function (list, key) {
@@ -40,13 +49,18 @@ var library = (function () {
             });
         },
         reduce: function (list, iterator, accumulator) {
-        for (var i = 0; i < list.length; i++) {
-            accumulator = iterator(list[i], accumulator);
-        }
-        return accumulator;
+            for (var i = 0; i < list.length; i++) {
+                accumulator = iterator(list[i], accumulator);
+            }
+            return accumulator;
         },
 
-        every: function (list, iterator) { },
+        every: function (list, iterator) {
+            var x;
+            if (list[x] == true) {
+
+            }
+        },
 
         some: function (list, iterator) { },
 
